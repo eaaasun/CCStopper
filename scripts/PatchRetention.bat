@@ -123,7 +123,7 @@ echo %folder%>.\patchRetentionSettings\paths.txt
 cls
 echo:
 echo Path set as %folder%.
-pause
+timeout /t 3 /nobreak
 goto menu
 endlocal
 
@@ -174,5 +174,5 @@ if errorlevel  1 (
 :writeFile
 echo %CCAppYear%>.\patchRetentionSettings\appVer.txt
 echo App version set successfully!
-pause
+timeout /t 3 /nobreak
 goto menu

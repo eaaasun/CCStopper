@@ -44,7 +44,11 @@ if not exist ".\PatchRetentionSettings\paths.txt" (
 )
 
 :: Reads from paths.txt and sets what's inside as %folder%
-set /p "folder="<".\patchRetentionSettings\paths.txt"
+set /p "folder="<".\PatchRetentionSettings\paths.txt"
+
+:exit
+start cmd /k %~dp0\..\CCStopper.bat
+exit
 
 :menu
 cls
@@ -84,11 +88,7 @@ echo                   Adobe app version: CC%CCAppYear%
 echo:          
 choice /C:12345 /N /M ">                                     Select [1,2,3,4,5]: "
 
-if errorlevel  5 (
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
-)
+if errorlevel 5 goto exit
 if errorlevel 4 goto setYear
 if errorlevel 3 goto setPath
 if errorlevel 2 (

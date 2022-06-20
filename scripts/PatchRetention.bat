@@ -50,7 +50,7 @@ set /p "folder="<".\PatchRetentionSettings\paths.txt"
 start cmd /k %~dp0\..\CCStopper.bat
 exit
 
-:menu
+:mainScript
 cls
 echo:
 echo:
@@ -118,7 +118,7 @@ cls
 echo:
 echo Path set as %folder%.
 timeout /t 3 /nobreak
-goto menu
+goto mainScript
 endlocal
 
 :setYear
@@ -169,4 +169,4 @@ if errorlevel 1 (
 echo %CCAppYear%>.\PatchRetentionSettings\appVer.txt
 echo App version set successfully!
 timeout /t 3 /nobreak
-goto menu
+goto mainScript

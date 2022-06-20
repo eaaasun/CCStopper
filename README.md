@@ -63,6 +63,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 - [2] Service Block - Blocks Adobe servers and the credit card prompt from accessing the internet.
 - [3] Trial Banner - Removes the trial banner found in apps.
 - [4] Acrobat - Edits registry to patch Acrobat. NOTE: please stop Adobe Processes, patch genuine checker, and patch Acrobat with GenP before running this patch.
+- [5] Retention - Locks the files patched by GenP so nothing can modify them.
 </details>
 
 <details>

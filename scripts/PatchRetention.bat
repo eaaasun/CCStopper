@@ -133,7 +133,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                   genP Patch Retention Module                 ^|
+echo                  ^|                   GenP Patch Retention Module                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                        SET CC APP VERSION                     ^|

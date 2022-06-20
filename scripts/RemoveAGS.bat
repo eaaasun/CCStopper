@@ -3,6 +3,8 @@
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
+set AGCCFolder="%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
+
 :: Disables AGSSerivce from starting up, then stops it
 for %%a in (AGSService AGMService) do ( 
 	sc config "%%a" start= disabled
@@ -11,12 +13,12 @@ for %%a in (AGSService AGMService) do (
 )
 
 :: Checks if AGSService Exists
-if exist "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" (
-	rmdir /Q /S "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
+if exist %AGCCFolder% (
+	rmdir /Q /S %AGCCFolder%
 )
 
-cd "%ProgramFiles(x86)%\Common Files\Adobe\"
-mkdir "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
-icacls "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" /deny Administrators:(F)
+mkdir %AGCCFolder%
+takeown /f %AGCCFolder%
+icacls %AGCCFolder% /deny Administrators:^(F^)
 
 start cmd /k %~dp0\..\CCStopper.bat

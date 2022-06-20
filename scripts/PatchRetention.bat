@@ -11,13 +11,9 @@ if not exist ".\PatchRetentionSettings" (
 	mkdir ".\PatchRetentionSettings"
 )
 
-:: Sets the cc app year to 2022
-if not exist ".\pathRetentionSettiongs\appVer.txt" (
-	set CCAppYear=2022
-)
-else (
-	set /p "CCAppYear="<".\patchRetentionSettings\appVer.txt"
-)
+:: Set the cc app year to 2022
+if not exist ".\PatchRetentionSettings\appVer.txt" set CCAppYear=2022
+else set /p "CCAppYear="<".\PatchRetentionSettings\appVer.txt"
 
 :: Checks if paths.txt exists
 :pathCheck

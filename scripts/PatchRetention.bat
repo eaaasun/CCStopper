@@ -97,13 +97,12 @@ if errorlevel 4 goto setYear
 if errorlevel 3 goto setPath
 if errorlevel 2 (
 	:: Reset patch
+	icacls %paths% /reset
 )
 if errorlevel 1 (
 	:: Patch apps
+	icacls %paths% /deny Administrators:^(F^)
 )
-
-:: Deny permissions to file
-@REM icacls %paths% /deny Administrators:(F)
 
 :setPath
 setlocal

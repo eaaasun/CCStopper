@@ -12,12 +12,12 @@ if not exist ".\PatchRetentionSettings" (
 )
 
 :: Set the cc app year to 2022
-if not exist ".\PatchRetentionSettings\appVer.txt" set CCAppYear=2022
-else set /p "CCAppYear="<".\PatchRetentionSettings\appVer.txt"
+if not exist ".\PatchRetentionSettings\AppVersion.txt" set CCAppYear=2022
+else set /p "CCAppYear="<".\PatchRetentionSettings\AppVersion.txt"
 
-:: Check if paths.txt exists
+:: Check if Path.txt exists
 :pathCheck
-if not exist ".\PatchRetentionSettings\paths.txt" (
+if not exist ".\PatchRetentionSettings\Path.txt" (
 	:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	cls
 	echo:
@@ -42,8 +42,8 @@ if not exist ".\PatchRetentionSettings\paths.txt" (
 	goto setPath
 )
 
-:: Reads from paths.txt and sets what's inside as %folder%
-set /p "folder="<".\PatchRetentionSettings\paths.txt"
+:: Reads from Path.txt and sets what's inside as %folder%
+set /p "folder="<".\PatchRetentionSettings\Path.txt"
 
 :exit
 start cmd /k %~dp0\..\CCStopper.bat
@@ -111,7 +111,7 @@ if not exist %folder% (
 	goto setPath
 )
 
-echo %folder%>.\PatchRetentionSettings\paths.txt
+echo %folder%>.\PatchRetentionSettings\Path.txt
 cls
 echo:
 echo Path set as %folder%.
@@ -164,7 +164,7 @@ if errorlevel 1 (
 )
 
 :writeFile
-echo %CCAppYear%>.\PatchRetentionSettings\appVer.txt
+echo %CCAppYear%>.\PatchRetentionSettings\AppVersion.txt
 echo App version set successfully!
 timeout /t 3 /nobreak
 goto mainScript

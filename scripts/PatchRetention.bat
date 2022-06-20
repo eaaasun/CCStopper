@@ -93,7 +93,7 @@ cd %~dp0
 cd ..
 start cmd /k CCStopper.bat
 )
-if errorlevel 4 goto setyear
+if errorlevel 4 goto setYear
 if errorlevel 3 goto setPath
 if errorlevel 2 (
 	:: Reset patch
@@ -117,7 +117,7 @@ for /f "usebackq delims=" %%I in (`powershell %psCommand%`) do set "folder=%%I"
 if "%folder%"=="ECHO is off." (
 	echo:
 	echo You have not selected a folder. Please pick the folder that Adobe apps are installed in.
-	goto :setPath
+	goto setPath
 )
 
 echo %folder%>.\patchRetentionSettings\paths.txt

@@ -7,9 +7,7 @@ mode con: cols=100 lines=42
 cd /d "%~dp0"
 
 :: Check if PatchRetentionSettings folder exists
-if not exist ".\PatchRetentionSettings" (
-	mkdir ".\PatchRetentionSettings"
-)
+if not exist ".\PatchRetentionSettings" mkdir ".\PatchRetentionSettings"
 
 :: Set the cc app year to 2022
 if not exist ".\PatchRetentionSettings\AppVersion.txt" set CCAppYear=2022
@@ -45,24 +43,29 @@ if not exist ".\PatchRetentionSettings\Path.txt" (
 :: Reads from Path.txt and sets what's inside as %folder%
 set /p "folder="<".\PatchRetentionSettings\Path.txt"
 
-set afterEffects = "%folder%\Adobe After Effects CC %CCAppYear%\Support Files\AfterFXLib.dll"
-set animate = "%folder%\Adobe Animate %CCAppYear%\Animate.exe"
-set audition = "%folder%\Adobe Audition CC %CCAppYear%\AuUI.dll"
-set bridge = "%folder%\Adobe Bridge CC %CCAppYear%\Bridge.exe"
-set characterAnimator = "%folder%\Adobe Character Animator CC %CCAppYear%\Support Files\Character Animator.exe"
-set dreamweaver = "%folder%\Adobe Dreamweaver CC %CCAppYear%\Dreamweaver.exe"
-set illustrator = "%folder%\Adobe Illustrator CC %CCAppYear%\Support Files\Contents\Windows\Illustrator.exe"
-set inCopy = "%folder%\Adobe InCopy CC %CCAppYear%\Public.dll"
-set inDesign = "%folder%\Adobe InDesign CC %CCAppYear%\Public.dll"
-set lightroom = "%folder%\Adobe Lightroom CC\lightroomcc.exe"
-set lightroomClassic = "%folder%\Adobe Lightroom Classic CC\Lightroom.exe"
-set mediaEncoder = "%folder%\Adobe Media Encoder CC %CCAppYear%\Adobe Media Encoder.exe"
-set photoshop = "%folder%\Adobe Photoshop CC %CCAppYear%\Photoshop.exe"
-set prelude = "%folder%\Adobe Prelude CC %CCAppYear%\Registration.dll"
-set premierePro = "%folder%\Adobe Premiere Pro CC %CCAppYear%\Registration.dll"
-set premiereRush = "%folder%\Adobe Premiere Rush CC\Registration.dll"
-set acrobatDC = "%folder%\Acrobat DC\Acrobat\Acrobat.dll"
-set apps = %afterEffects% %animate% %audition% %bridge% %characterAnimator% %dreamweaver% %illustrator% %inCopy% %inDesign% %lightroom% %lightroomClassic% %mediaEncoder% %photoshop% %prelude% %premierePro% %premiereRush% %acrobatDC%
+for /d %%d in ("%folder%\*") do (
+	set subfolder=%%~nxd
+	set subfolder=%subfolder:Adobe =%
+
+	if "%subfolder:~0,16%"=="After Effects CC" set result=%subfolder%\Support Files\AfterFXLib.dll
+	@REM Adobe Animate %CCAppYear%\Animate.exe
+	@REM Adobe Audition CC %CCAppYear%\AuUI.dll
+	@REM Adobe Bridge CC %CCAppYear%\Bridge.exe
+	@REM Adobe Character Animator CC %CCAppYear%\Support Files\Character Animator.exe
+	@REM Adobe Dreamweaver CC %CCAppYear%\Dreamweaver.exe
+	@REM Adobe Illustrator CC %CCAppYear%\Support Files\Contents\Windows\Illustrator.exe
+	@REM Adobe InCopy CC %CCAppYear%\Public.dll
+	@REM Adobe InDesign CC %CCAppYear%\Public.dll
+	@REM Adobe Lightroom CC\lightroomcc.exe
+	@REM Adobe Lightroom Classic CC\Lightroom.exe
+	@REM Adobe Media Encoder CC %CCAppYear%\Adobe Media Encoder.exe
+	@REM Adobe Photoshop CC %CCAppYear%\Photoshop.exe
+	@REM Adobe Prelude CC %CCAppYear%\Registration.dll
+	@REM Adobe Premiere Pro CC %CCAppYear%\Registration.dll
+	@REM Adobe Premiere Rush CC\Registration.dll
+	@REM Acrobat DC\Acrobat\Acrobat.dll
+	set apps = %afterEffects% %animate% %audition% %bridge% %characterAnimator% %dreamweaver% %illustrator% %inCopy% %inDesign% %lightroom% %lightroomClassic% %mediaEncoder% %photoshop% %prelude% %premierePro% %premiereRush% %acrobatDC%
+)
 
 :exit
 start cmd /k %~dp0\..\CCStopper.bat

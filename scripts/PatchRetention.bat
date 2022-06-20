@@ -3,7 +3,7 @@ title CCStopper - Patch Retention
 mode con: cols=100 lines=42
 
 :: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
 :: Check if PatchRetentionSettings folder exists
@@ -28,7 +28,7 @@ if not exist ".\PatchRetentionSettings\paths.txt" (
 	echo                  ^|                                                               ^|
 	echo                  ^|                            CCSTOPPER                          ^|
 	echo                  ^|                         Made by eaaasun                       ^|
-	echo                  ^|                   genP Patch Retention Module                 ^|
+	echo                  ^|                   GenP Patch Retention Module                 ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|                     SELECT ADOBE APP FOLDER                   ^|

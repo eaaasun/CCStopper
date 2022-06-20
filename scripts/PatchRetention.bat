@@ -18,9 +18,8 @@ else set /p "CCAppYear="<".\PatchRetentionSettings\appVer.txt"
 :: Check if paths.txt exists
 :pathCheck
 if not exist ".\PatchRetentionSettings\paths.txt" (
-	:: Shows a message for user to set up the paths
-	cls
 	:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	cls
 	echo:
 	echo:
 	echo                   _______________________________________________________________

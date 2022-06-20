@@ -151,19 +151,19 @@ echo:
 echo:          
 choice /C:1234 /N /M ">                                       Select [1,2,3,4]: "
 
-if errorlevel  4 (
+if errorlevel 4 (
 	set CCAppYear=2019
 	goto writeFile
 ) 
-if errorlevel  3 (
+if errorlevel 3 (
 	set CCAppYear=2020
 	goto writeFile
 )
-if errorlevel  2 (
+if errorlevel 2 (
 	set CCAppYear=2021
 	goto writeFile
 )
-if errorlevel  1 (
+if errorlevel 1 (
 	set CCAppYear=2022
 	goto writeFile
 )

@@ -1,13 +1,12 @@
 @echo off
 title CCStopper - Patch Retention
-Set "Path=%Path%;%CD%;%CD%\Plugins;"
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: Asks for Administrator Permissions
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
-:: checks if patchRetentionSettings folder exists
+:: Checks if patchRetentionSettings folder exists
 if not exist ".\patchRetentionSettings" (
 	mkdir ".\patchRetentionSettings"
 )
@@ -20,10 +19,10 @@ else (
 	set /p "CCAppYear="<".\patchRetentionSettings\appVer.txt"
 )
 
-:: checks if paths.txt exists
+:: Checks if paths.txt exists
 :pathCheck
 if not exist ".\patchRetentionSettings\paths.txt" (
-	:: shows a message for user to set up the paths
+	:: Shows a message for user to set up the paths
 	cls
 	:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	echo:
@@ -48,10 +47,9 @@ if not exist ".\patchRetentionSettings\paths.txt" (
 	goto setPath
 )
 
-:: reads from paths.txt and sets what's inside as %folder%
+:: Reads from paths.txt and sets what's inside as %folder%
 set /p "folder="<".\patchRetentionSettings\paths.txt"
 
-:: Main script
 :menu
 cls
 echo:
@@ -95,25 +93,22 @@ cd %~dp0
 cd ..
 start cmd /k CCStopper.bat
 )
-if errorlevel  4 goto setyear
-if errorlevel  3 goto setPath
-if errorlevel  2 (
-	:: reset patch
+if errorlevel 4 goto setyear
+if errorlevel 3 goto setPath
+if errorlevel 2 (
+	:: Reset patch
 )
-if errorlevel  1 (
-	:: patch apps
+if errorlevel 1 (
+	:: Patch apps
 )
-
-
 
 :: Deny permissions to file
 @REM icacls %paths% /deny Administrators:(F)
 
-:: https://stackoverflow.com/a/15885133
 :setPath
 setlocal
 
-set "psCommand="(new-object -COM 'Shell.Application')^
+set "psCommand="(New-Object -COMObject 'Shell.Application')^
 .BrowseForFolder(0,'Choose folder where Adobe apps are installed.',0,0).self.path""
 
 for /f "usebackq delims=" %%I in (`powershell %psCommand%`) do set "folder=%%I"

@@ -6,9 +6,9 @@ mode con: cols=100 lines=42
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
-:: Checks if patchRetentionSettings folder exists
-if not exist ".\patchRetentionSettings" (
-	mkdir ".\patchRetentionSettings"
+:: Check if PatchRetentionSettings folder exists
+if not exist ".\PatchRetentionSettings" (
+	mkdir ".\PatchRetentionSettings"
 )
 
 :: Sets the cc app year to 2022
@@ -21,7 +21,7 @@ else (
 
 :: Checks if paths.txt exists
 :pathCheck
-if not exist ".\patchRetentionSettings\paths.txt" (
+if not exist ".\PatchRetentionSettings\paths.txt" (
 	:: Shows a message for user to set up the paths
 	cls
 	:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -110,13 +110,14 @@ set "psCommand="(New-Object -COMObject 'Shell.Application')^
 .BrowseForFolder(0,'Choose folder where Adobe apps are installed.',0,0).self.path""
 for /f "usebackq delims=" %%I in (`powershell %psCommand%`) do set "folder=%%I"
 
+@REM This is a bad way of detecting
 if "%folder%"=="ECHO is off." (
 	echo:
 	echo You have not selected a folder. Please pick the folder that Adobe apps are installed in.
 	goto setPath
 )
 
-echo %folder%>.\patchRetentionSettings\paths.txt
+echo %folder%>.\PatchRetentionSettings\paths.txt
 cls
 echo:
 echo Path set as %folder%.
@@ -169,7 +170,7 @@ if errorlevel 1 (
 )
 
 :writeFile
-echo %CCAppYear%>.\patchRetentionSettings\appVer.txt
+echo %CCAppYear%>.\PatchRetentionSettings\appVer.txt
 echo App version set successfully!
 timeout /t 3 /nobreak
 goto menu

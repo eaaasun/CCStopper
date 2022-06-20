@@ -29,7 +29,7 @@ echo          ^|                            ^|  processes and internet access (f
 echo          ^|                            ^|  credit card prompt).                            ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Trial Banner,           ^|
-echo          ^|                            ^|  Acrobat                                         ^|
+echo          ^|                            ^|  Acrobat, Retention                              ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [4] Credit/Repo       ^|  Credits, Github Repo                            ^|
 echo          ^|      _________________________________________________________________        ^|
@@ -130,6 +130,9 @@ echo          ^|      [3] Acrobat           ^|  Edits registry to patch Acrobat.
 echo          ^|                            ^|  stop Adobe Processes, patch genuine             ^|
 echo          ^|                            ^|  checker, and patch Acrobat with genP            ^|
 echo          ^|                            ^|  before running this patch.                      ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [4] Retention         ^|  Locks the files patched by GenP so nothing can  ^|
+echo          ^|                            ^|  modify them.                                    ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
 echo          ^|      [Q] Back                                                                 ^|
@@ -140,7 +143,12 @@ choice /C:123Q /N /M ">                                       Select [1,2,3,Q]: 
 
 cls
 
-if errorlevel 4 goto mainMenu
+if errorlevel 5 goto mainMenu
+
+if errorlevel 4 (
+	.\scripts\PatchRetention.bat
+	goto patchesMenu
+)
 
 if errorlevel 3 (
 	.\scripts\AcrobatFix.bat
@@ -179,7 +187,7 @@ echo          ^|      @ItsProfessional      ^|  Contributor                     
 echo          ^|      @sh32devnull          ^|                                                  ^|
 echo          ^|      @ZEN1X                ^|                                                  ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      genP Discord/Reddit   ^|  Patch information and development help.         ^|
+echo          ^|      GenP Discord/Reddit   ^|  Patch information and development help.         ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      You!                  ^|  Reporting bugs and supporting the               ^|
 echo          ^|                            ^|  project!                                        ^|

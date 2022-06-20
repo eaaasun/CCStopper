@@ -59,12 +59,12 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                   genP Patch Retention Module                 ^|
+echo                  ^|                   GenP Patch Retention Module                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                      PATCH WITH GENP FIRST!                   ^|
 echo                  ^|                                                               ^|
-echo                  ^|      This script prevents *any* program (including genP)      ^|
+echo                  ^|      This script prevents *any* program (including GenP)      ^|
 echo                  ^|      from touching the patched files or files that need       ^|
 echo                  ^|      to be patched.                                           ^|
 echo                  ^|                                                               ^|
@@ -72,7 +72,7 @@ echo                  ^|      __________________________________________________
 echo                  ^|                                                               ^|
 echo                  ^|      [1] Patch Apps                                           ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] Reset patch (won't affect genP patch)                ^|
+echo                  ^|      [2] Reset patch (Won't affect GenP patch)                ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Set app installation path                            ^|

@@ -111,14 +111,14 @@ if errorlevel 4 goto setYear
 if errorlevel 3 goto setPath
 if errorlevel 2 (
 	:: Reset patch
-	for %%a in (%files%) do (
-		if exist %%a icacls %paths% /reset
+	for %%a in (%apps%) do (
+		if exist %%a icacls %%a /reset
 	)
 )
 if errorlevel 1 (
 	:: Patch apps
-	for %%a in (%files%) do (
-		if exist %%a icacls %paths% /deny Administrators:^(W^)
+	for %%a in (%apps%) do (
+		if exist %%a icacls %%a /deny Administrators:^(W^)
 	)
 )
 

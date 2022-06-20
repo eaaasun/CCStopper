@@ -45,6 +45,25 @@ if not exist ".\PatchRetentionSettings\Path.txt" (
 :: Reads from Path.txt and sets what's inside as %folder%
 set /p "folder="<".\PatchRetentionSettings\Path.txt"
 
+set afterEffects = "%folder%\Adobe After Effects CC %CCAppYear%\Support Files\AfterFXLib.dll"
+set animate = "%folder%\Adobe Animate %CCAppYear%\Animate.exe"
+set audition = "%folder%\Adobe Audition CC %CCAppYear%\AuUI.dll"
+set bridge = "%folder%\Adobe Bridge CC %CCAppYear%\Bridge.exe"
+set characterAnimator = "%folder%\Adobe Character Animator CC %CCAppYear%\Support Files\Character Animator.exe"
+set dreamweaver = "%folder%\Adobe Dreamweaver CC %CCAppYear%\Dreamweaver.exe"
+set illustrator = "%folder%\Adobe Illustrator CC %CCAppYear%\Support Files\Contents\Windows\Illustrator.exe"
+set inCopy = "%folder%\Adobe InCopy CC %CCAppYear%\Public.dll"
+set inDesign = "%folder%\Adobe InDesign CC %CCAppYear%\Public.dll"
+set lightroom = "%folder%\Adobe Lightroom CC\lightroomcc.exe"
+set lightroomClassic = "%folder%\Adobe Lightroom Classic CC\Lightroom.exe"
+set mediaEncoder = "%folder%\Adobe Media Encoder CC %CCAppYear%\Adobe Media Encoder.exe"
+set photoshop = "%folder%\Adobe Photoshop CC %CCAppYear%\Photoshop.exe"
+set prelude = "%folder%\Adobe Prelude CC %CCAppYear%\Registration.dll"
+set premierePro = "%folder%\Adobe Premiere Pro CC %CCAppYear%\Registration.dll"
+set premiereRush = "%folder%\Adobe Premiere Rush CC\Registration.dll"
+set acrobatDC = "%folder%\Acrobat DC\Acrobat\Acrobat.dll"
+set apps = %afterEffects% %animate% %audition% %bridge% %characterAnimator% %dreamweaver% %illustrator% %inCopy% %inDesign% %lightroom% %lightroomClassic% %mediaEncoder% %photoshop% %prelude% %premierePro% %premiereRush% %acrobatDC%
+
 :exit
 start cmd /k %~dp0\..\CCStopper.bat
 exit
@@ -92,11 +111,15 @@ if errorlevel 4 goto setYear
 if errorlevel 3 goto setPath
 if errorlevel 2 (
 	:: Reset patch
-	icacls %paths% /reset
+	for %%a in (%files%) do (
+		if exist %%a icacls %paths% /reset
+	)
 )
 if errorlevel 1 (
 	:: Patch apps
-	icacls %paths% /deny Administrators:^(F^)
+	for %%a in (%files%) do (
+		if exist %%a icacls %paths% /deny Administrators:^(W^)
+	)
 )
 
 :setPath

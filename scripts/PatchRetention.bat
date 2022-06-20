@@ -105,7 +105,6 @@ set "psCommand="(New-Object -COMObject 'Shell.Application')^
 .BrowseForFolder(0,'Choose folder where Adobe apps are installed.',0,0).self.path""
 for /f "usebackq delims=" %%I in (`powershell %psCommand%`) do set "folder=%%I"
 
-@REM This is a bad way of detecting
 if not exist %folder% (
 	echo:
 	echo You have not selected a folder. Please pick the folder that Adobe apps are installed in.
